@@ -1,0 +1,19 @@
+- import_tasks: files.yml
+  tags:
+    - structure
+    - structure_files
+
+- import_tasks: copies.yml
+  tags:
+    - structure
+    - structure_copies
+
+- import_tasks: templates.yml
+  tags:
+    - structure
+    - structure_templates
+
+- import_tasks: assembles.yml
+  tags:
+    - structure
+    - structure_assembles
