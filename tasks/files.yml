@@ -20,3 +20,4 @@
     state: "{{ item.state | default(omit) }}"
     unsafe_writes: "{{ item.unsafe_writes | default(omit) }}"
   loop: "{{ structure_files }}"
+  when: item.when | default(true)

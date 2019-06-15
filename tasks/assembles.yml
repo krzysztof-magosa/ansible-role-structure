@@ -19,3 +19,4 @@
     unsafe_writes: "{{ item.unsafe_writes | default(omit) }}"
     validate: "{{ item.validate | default(omit) }}"
   loop: "{{ structure_assembles }}"
+  when: item.when | default(true)

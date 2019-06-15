@@ -26,3 +26,4 @@
   vars:
     vars: "{{ item.vars | default({}) }}"
   loop: "{{ structure_templates }}"
+  when: item.when | default(true)
