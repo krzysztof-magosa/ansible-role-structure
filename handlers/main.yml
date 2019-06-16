@@ -20,7 +20,7 @@
   listen: structure::handlers
 
 - name: Run shell handlers
-  shell: "echo hello" # noqa 305
+  shell: "{{ item.command }}" # noqa 305
   args:
     warn: no
   loop: "{{ structure_triggered_handlers | selectattr('module', 'equalto', 'shell') | list }}"
