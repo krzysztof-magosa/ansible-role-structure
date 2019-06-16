@@ -27,3 +27,5 @@
     vars: "{{ item.vars | default({}) }}"
   loop: "{{ structure_templates }}"
   when: item.when | default(true)
+  register: structure_templates_result
+  notify: structure::handlers

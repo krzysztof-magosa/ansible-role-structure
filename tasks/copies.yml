@@ -23,3 +23,5 @@
     validate: "{{ item.validate | default(omit) }}"
   loop: "{{ structure_copies }}"
   when: item.when | default(true)
+  register: structure_copies_result
+  notify: structure::handlers

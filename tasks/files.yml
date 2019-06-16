@@ -21,3 +21,5 @@
     unsafe_writes: "{{ item.unsafe_writes | default(omit) }}"
   loop: "{{ structure_files }}"
   when: item.when | default(true)
+  register: structure_files_result
+  notify: structure::handlers

@@ -1,4 +1,26 @@
+# Consult https://docs.ansible.com/ansible/latest/modules/file_module.html#id2 to see parameters.
+# You can use 'notify' as in copies example to trigger actions.
 structure_files: []
+
+# Consult https://docs.ansible.com/ansible/latest/modules/copy_module.html#id2 to see parameters.
+# You can use 'notify' as in copies example to trigger actions.
 structure_copies: []
+  # - src: assets/telegraf.conf
+  #   dest: /data/telegraf.conf
+  #   notify:
+  #     - reload telegraf
+
+# Consult https://docs.ansible.com/ansible/latest/modules/template_module.html#id2 to see parameters.
+# You can use 'notify' as in copies example to trigger actions.
 structure_templates: []
+
+# Consult https://docs.ansible.com/ansible/latest/modules/assemble_module.html#id2 to see parameters.
+# You can use 'notify' as in copies example to trigger actions.
 structure_assembles: []
+
+# Handlers to be run when some of tasks has changed status.
+# At the moment only shell module with simple command is supported.
+structure_handlers:
+  # - name: reload telegraf
+  #   module: shell
+  #   command: docker kill --signal=HUP telegraf

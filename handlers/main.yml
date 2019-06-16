@@ -1,0 +1,27 @@
+- name: Combine all changed tasks
+  set_fact:
+    structure_changed_items: >-
+      {{
+      ((structure_assembles_result | default(dict(results=[]))).results | select('changed') | list) +
+      ((structure_copies_result    | default(dict(results=[]))).results | select('changed') | list) +
+      ((structure_files_result     | default(dict(results=[]))).results | select('changed') | list) +
+      ((structure_templates_result | default(dict(results=[]))).results | select('changed') | list)
+      }}
+  listen: structure::handlers
+
+- name: Calculate triggered notifies
+  set_fact:
+    structure_triggered_notifies: "{{ structure_changed_items | map(attribute='item.notify') | reject('undefined') | list | flatten(1) }}"
+  listen: structure::handlers
+
+- name: Calculate triggered handlers
+  set_fact:
+    structure_triggered_handlers: "{{ structure_handlers | selectattr('name', 'in', structure_triggered_notifies) | list }}"
+  listen: structure::handlers
+
+- name: Run shell handlers
+  shell: "echo hello" # noqa 305
+  args:
+    warn: no
+  loop: "{{ structure_triggered_handlers | selectattr('module', 'equalto', 'shell') | list }}"
+  listen: structure::handlers
